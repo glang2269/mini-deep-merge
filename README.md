@@ -38,3 +38,10 @@ patch overwrites the base value; it is not a sentinel meaning "delete this key".
 
 - `deep_merge(a: Mapping, b: Mapping) -> dict` — recursively merge `b` into
   `a`. Neither input is mutated. Returns a new dict.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
